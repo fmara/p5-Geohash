@@ -262,6 +262,10 @@ Returns the list of neighbors (the blocks surrounding $hash)
 
 Returns the apparent required precision to describe the given latitude and longitude.
 
+=head2 @list_of_merged_geohashes = $gh->merge(@list_of_geohashes)
+
+=head2 @list_of_geohashes = $gh->crash(@list_of_merged_geohashes)
+
 =head1 CONSTANTS
 
 =head2 ADJ_LEFT, ADJ_RIGHT, ADJ_TOP, ADJ_BOTTOM

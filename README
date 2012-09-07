@@ -55,6 +55,8 @@ METHODS
     Returns the apparent required precision to describe the given latitude
     and longitude.
 
+  @list_of_merged_geohashes = $gh->merge(@list_of_geohashes)
+  @list_of_geohashes = $gh->crash(@list_of_merged_geohashes)
 CONSTANTS
   ADJ_LEFT, ADJ_RIGHT, ADJ_TOP, ADJ_BOTTOM
     Used to specify the direction in "adjacent()"
