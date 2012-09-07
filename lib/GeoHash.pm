@@ -209,6 +209,16 @@ GeoHash - Geo::Hash* wrapper with any utils
     my $hash = $gh->encode( $lat, $lon, $precision );
     my ($lat, $lon) = $gh->decode( $hash );
 
+fource use pp
+
+   BEGIN { $ENV{PERL_GEOHASH_BACKEND} = 'Geo::Hash' }
+   use GeoHash;
+
+fource use xs
+
+   BEGIN { $ENV{PERL_GEOHASH_BACKEND} = 'Geo::Hash::XS' }
+   use GeoHash;
+
 =head1 DESCRIPTION
 
 GeoHash is
