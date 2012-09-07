@@ -1,20 +1,71 @@
 # NAME
 
-GeoHash -
+GeoHash - Geo::Hash* wrapper with any utils
 
 # SYNOPSIS
 
     use GeoHash;
+    my $gh = Geo::Hash->new();
+    my $hash = $gh->encode( $lat, $lon );  # default precision = 32
+    my $hash = $gh->encode( $lat, $lon, $precision );
+    my ($lat, $lon) = $gh->decode( $hash );
 
 # DESCRIPTION
 
 GeoHash is
+
+# METHODS
+
+## $gh = Geo::Hash::XS->new()
+
+## $hash = $gh->encode($lat, $lon[, $precision])
+
+Encodes the given `$lat` and `$lon` to a geohash. If `$precision` is not
+given, automatically adjusts the precision according the the given `$lat`
+and `$lon` values.
+
+If you do not want GeoHash to spend time calculating this, explicitly
+specify `$precision`.
+
+## ($lat, $lon) = $gh->decode( $hash )
+
+Decodes $hash to $lat and $lon
+
+## ($lat_range, $lon_range) = $gh->decode_to_interval( $hash )
+
+Like `decode()` but `decode_to_interval()` decodes $hash to $lat_range and $lon_range. Each range is a reference to two element arrays which contains the upper and lower bounds.
+
+## $adjacent_hash = $gh->adjacent($hash, $where)
+
+Returns the adjacent geohash. `$where` denotes the direction, so if you
+want the block to the right of `$hash`, you say:
+
+    use GeoHash qw(ADJ_RIGHT);
+
+    my $gh = GeoHash->new();
+    my $adjacent = $gh->adjacent( $hash, ADJ_RIGHT );
+
+## @list_of_geohashes = $gh->neighbors($hash, $around, $offset)
+
+Returns the list of neighbors (the blocks surrounding $hash)
+
+## $precision = $gh->precision($lat, $lon)
+
+Returns the apparent required precision to describe the given latitude and longitude.
+
+# CONSTANTS
+
+## ADJ_LEFT, ADJ_RIGHT, ADJ_TOP, ADJ_BOTTOM
+
+Used to specify the direction in `adjacent()`
 
 # AUTHOR
 
 Kazuhiro Osawa <yappo {at} shibuya {dot} pl>
 
 # SEE ALSO
+
+[Geo::Hash](http://search.cpan.org/perldoc?Geo::Hash), [Geo::Hash::XS](http://search.cpan.org/perldoc?Geo::Hash::XS)
 
 # LICENSE
 

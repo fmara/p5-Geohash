@@ -5,12 +5,13 @@ readme_from 'lib/GeoHash.pm';
 readme_markdown_from 'lib/GeoHash.pm';
 githubmeta;
 
-# requires '';
+requires 'parent';
+requires 'Geo::Hash';
+build_requires 'Test::More';
+build_requires 'Test::Require';
 
 tests 't/*.t';
 author_tests 'xt';
 
-build_requires 'Test::More';
 auto_set_repository;
-auto_include;
 WriteAll;
