@@ -32,10 +32,10 @@ BEGIN {
     sub backend_class { $class }
 
     no strict 'refs';
-    *ADJ_RIGHT  = \&{"$class\::ADJ_RIGHT"};
-    *ADJ_LEFT   = \&{"$class\::ADJ_LEFT"};
-    *ADJ_TOP    = \&{"$class\::ADJ_TOP"};
-    *ADJ_BOTTOM = \&{"$class\::ADJ_BOTTOM"};
+    *ADJ_RIGHT  = sub { &{"$class\::ADJ_RIGHT"} };
+    *ADJ_LEFT   = sub { &{"$class\::ADJ_LEFT"} };
+    *ADJ_TOP    = sub { &{"$class\::ADJ_TOP"} };
+    *ADJ_BOTTOM = sub { &{"$class\::ADJ_BOTTOM"} };
 }
 
 sub new {
@@ -65,43 +65,6 @@ for my $method (qw/ encode decode decode_to_interval adjacent neighbors precisio
     my @ENC = qw(
         0 1 2 3 4 5 6 7 8 9 b c d e f g h j k m n p q r s t u v w x y z
     );
-
-    # https://github.com/yappo/Geo--Hash/tree/issue-60782
-    use POSIX qw/ceil/;
-
-    use constant LOG2_OF_10  => log(10)  / log(2);
-    use constant LOG2_OF_180 => log(180) / log(2);
-    use constant LOG2_OF_360 => log(360) / log(2);
-
-    sub _num_of_decimal_places($) {## no critic
-        my $n = shift;
-        return 0 unless $n =~ s/.*\.//;
-        return length $n;
-    }
-
-    sub _length_for_bits($$) {## no critic
-        my ( $bits, $is_lat ) = @_;
-        my $q = int( $bits / 5 );
-        my $r = $bits % 5;
-        if ( $r == 0 ) {
-            return $q * 2;
-        }
-        elsif ( $r <= ( $is_lat ? 2 : 3 ) ) {
-            return $q * 2 + 1;
-        }
-        else {
-            return $q * 2 + 2;
-        }
-    }
-
-    sub precision {
-        my ( $self, $lat, $lon ) = @_;
-        my $lat_bit = ceil( _num_of_decimal_places( $lat ) * LOG2_OF_10 + LOG2_OF_180 );
-        my $lon_bit = ceil( _num_of_decimal_places( $lon ) * LOG2_OF_10 + LOG2_OF_360 );
-        my $lat_len = _length_for_bits( $lat_bit, 1 );
-        my $lot_len = _length_for_bits( $lon_bit, 0 );
-        return $lat_len > $lot_len ? $lat_len : $lot_len;
-    }
 
     # https://github.com/yappo/Geo--Hash/tree/feature-geo_hash_xs
     use constant ADJ_RIGHT  => 0;
