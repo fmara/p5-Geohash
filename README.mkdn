@@ -5,7 +5,7 @@ GeoHash - Geo::Hash* wrapper with any utils
 # SYNOPSIS
 
     use GeoHash;
-    my $gh = Geo::Hash->new();
+    my $gh = GeoHash->new();
     my $hash = $gh->encode( $lat, $lon );  # default precision = 32
     my $hash = $gh->encode( $lat, $lon, $precision );
     my ($lat, $lon) = $gh->decode( $hash );
@@ -26,7 +26,7 @@ GeoHash is
 
 # METHODS
 
-## $gh = Geo::Hash::XS->new()
+## $gh = GeoHash->new()
 
 ## $hash = $gh->encode($lat, $lon[, $precision])
 

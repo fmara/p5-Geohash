@@ -204,7 +204,7 @@ GeoHash - Geo::Hash* wrapper with any utils
 =head1 SYNOPSIS
 
     use GeoHash;
-    my $gh = Geo::Hash->new();
+    my $gh = GeoHash->new();
     my $hash = $gh->encode( $lat, $lon );  # default precision = 32
     my $hash = $gh->encode( $lat, $lon, $precision );
     my ($lat, $lon) = $gh->decode( $hash );
@@ -225,7 +225,7 @@ GeoHash is
 
 =head1 METHODS
 
-=head2 $gh = Geo::Hash::XS->new()
+=head2 $gh = GeoHash->new()
 
 =head2 $hash = $gh->encode($lat, $lon[, $precision])
 

@@ -3,7 +3,7 @@ NAME
 
 SYNOPSIS
         use GeoHash;
-        my $gh = Geo::Hash->new();
+        my $gh = GeoHash->new();
         my $hash = $gh->encode( $lat, $lon );  # default precision = 32
         my $hash = $gh->encode( $lat, $lon, $precision );
         my ($lat, $lon) = $gh->decode( $hash );
@@ -22,7 +22,7 @@ DESCRIPTION
     GeoHash is
 
 METHODS
-  $gh = Geo::Hash::XS->new()
+  $gh = GeoHash->new()
   $hash = $gh->encode($lat, $lon[, $precision])
     Encodes the given $lat and $lon to a geohash. If $precision is not
     given, automatically adjusts the precision according the the given $lat
