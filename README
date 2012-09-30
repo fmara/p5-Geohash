@@ -78,6 +78,13 @@ METHODS
             c2b25psy c2b25psz
         / ]);
 
+  validate
+    Verify correct as geohash.
+
+        ok($gh->validate('c2b25ps0');
+        ok(not $gh->validate('a'); # can not use 'a'
+        ok(not $gh->validate(); # required option
+
 CONSTANTS
   ADJ_LEFT, ADJ_RIGHT, ADJ_TOP, ADJ_BOTTOM
     Used to specify the direction in "adjacent()"

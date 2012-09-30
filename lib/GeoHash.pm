@@ -113,6 +113,11 @@ sub split {
     map { "$geohash$_" } @ENC;
 }
 
+sub validate {
+    my($self, $geohash) = @_;
+    $geohash && $geohash =~ /^[0123456789bcdefghjkmnpqrstuvwxyz]+$/;
+}
+
 
 {
     package GeoHash::backendPP;
@@ -303,6 +308,14 @@ geohash splitter.
         c2b25psn c2b25psp c2b25psq c2b25psr c2b25pss c2b25pst c2b25psu c2b25psv c2b25psw c2b25psx
         c2b25psy c2b25psz
     / ]);
+
+=head2 validate
+
+Verify correct as geohash.
+
+    ok($gh->validate('c2b25ps0');
+    ok(not $gh->validate('a'); # can not use 'a'
+    ok(not $gh->validate(); # required option
 
 =head1 CONSTANTS
 
