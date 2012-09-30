@@ -226,11 +226,26 @@ GeoHash - Geo::Hash* wrapper with any utils
 
 =head1 SYNOPSIS
 
+simple wrapper
+
     use GeoHash;
     my $gh = GeoHash->new();
     my $hash = $gh->encode( $lat, $lon );  # default precision = 32
     my $hash = $gh->encode( $lat, $lon, $precision );
     my ($lat, $lon) = $gh->decode( $hash );
+    my ($lat_range, $lon_range) = $gh->decode_to_interval( $hash );
+    my $precision = $gh->precision($lat, $lon);
+
+compatible with Pure Perl and XS
+
+    my $adjacent_hash = $gh->adjacent($hash, $where);
+    my @list_of_geohashes = $gh->neighbors($hash, $around, $offset);
+
+specific utilities of GeoHash.pm
+
+    my @list_of_merged_geohashes = $gh->merge(@list_of_geohashes);
+    my @list_of_geohashes = $gh->split(@list_of_merged_geohashes);
+    my $bool = $gh->validate( $geohash );
 
 fource use pp
 
@@ -244,7 +259,9 @@ fource use xs
 
 =head1 DESCRIPTION
 
-GeoHash is
+GeoHash is a wrapper module for use in the same interface and L<Geo::Hash> L<Geo::Hash::XS>. and utility method has been added to it.
+
+You can use the methods in the L<Geo::Hash> has been implemented in only L<Geo::Hash::XS>.
 
 =head1 METHODS
 
@@ -267,6 +284,10 @@ Decodes $hash to $lat and $lon
 
 Like C<decode()> but C<decode_to_interval()> decodes $hash to $lat_range and $lon_range. Each range is a reference to two element arrays which contains the upper and lower bounds.
 
+=head2 $precision = $gh->precision($lat, $lon)
+
+Returns the apparent required precision to describe the given latitude and longitude.
+
 =head2 $adjacent_hash = $gh->adjacent($hash, $where)
 
 Returns the adjacent geohash. C<$where> denotes the direction, so if you
@@ -280,10 +301,6 @@ want the block to the right of C<$hash>, you say:
 =head2 @list_of_geohashes = $gh->neighbors($hash, $around, $offset)
 
 Returns the list of neighbors (the blocks surrounding $hash)
-
-=head2 $precision = $gh->precision($lat, $lon)
-
-Returns the apparent required precision to describe the given latitude and longitude.
 
 =head2 @list_of_merged_geohashes = $gh->merge(@list_of_geohashes)
 
@@ -309,7 +326,7 @@ geohash splitter.
         c2b25psy c2b25psz
     / ]);
 
-=head2 validate
+=head2 $bool = $gh->validate($geohash)
 
 Verify correct as geohash.
 
