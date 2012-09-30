@@ -46,6 +46,7 @@ sub new {
     }, $class;
 }
 
+
 for my $method (qw/ encode decode decode_to_interval adjacent neighbors precision /) {
     my $code = sub {
         my $self = shift;
@@ -55,16 +56,65 @@ for my $method (qw/ encode decode decode_to_interval adjacent neighbors precisio
     *{$method} = $code;
 }
 
+
+my @ENC     = qw(
+    0 1 2 3 4 5 6 7 8 9 b c d e f g h j k m n p q r s t u v w x y z
+);
+my %ENC_MAP = map { $_ => 1 } @ENC;
+
+sub _merge_strip_last_char {
+    my($self, $geohash) = @_;
+    my @results;
+
+    if (length($geohash || '') < 2) {
+        return ($geohash);
+    }
+
+    my($parent_geohash, $last_char) = $geohash =~ /^(.+)(.)$/;
+    if ($last_char eq $ENC[0]) {
+        $self->{cache}{$parent_geohash}{$last_char}++;
+    } elsif ($last_char eq $ENC[-1]) {
+        $self->{cache}{$parent_geohash}{$last_char}++;
+
+        if (scalar(keys %{ $self->{cache}{$parent_geohash} }) == scalar(@ENC)) {
+            push @results, $self->_merge_strip_last_char($parent_geohash);
+        } else {
+            push @results, map { "$parent_geohash$_" } keys %{ $self->{cache}{$parent_geohash} };
+        }
+
+        delete $self->{cache}{$parent_geohash};
+    } else {
+        if ($self->{cache}{$parent_geohash} && $ENC_MAP{$last_char}) {
+            $self->{cache}{$parent_geohash}{$last_char}++;
+        } else {
+            push @results, $geohash;
+        }
+    }
+
+    return @results;
+}
+
+sub merge {
+    my $self = shift;
+    my @geohashes = sort @_;
+
+    $self->{cache}      = +{};
+    my @results;
+    for my $geohash (@geohashes) {
+        push @results, $self->_merge_strip_last_char($geohash);
+    }
+    delete $self->{cache};
+
+    sort @results;
+}
+
+
 {
     package GeoHash::backendPP;
     use strict;
     use warnings;
     use parent 'Geo::Hash';
     use Carp;
-
-    my @ENC = qw(
-        0 1 2 3 4 5 6 7 8 9 b c d e f g h j k m n p q r s t u v w x y z
-    );
 
     # https://github.com/yappo/Geo--Hash/tree/feature-geo_hash_xs
     use constant ADJ_RIGHT  => 0;
@@ -226,6 +276,16 @@ Returns the list of neighbors (the blocks surrounding $hash)
 Returns the apparent required precision to describe the given latitude and longitude.
 
 =head2 @list_of_merged_geohashes = $gh->merge(@list_of_geohashes)
+
+Merged with the larger area from geohash list. And remove duplicated geohash in @list_of_geohashes.
+
+    my @list = $gh->merge(qw/
+        c2b25ps0 c2b25ps1 c2b25ps2 c2b25ps3 c2b25ps4 c2b25ps5 c2b25ps6 c2b25ps7 c2b25ps8 c2b25ps9
+        c2b25psb c2b25psc c2b25psd c2b25pse c2b25psf c2b25psg c2b25psh c2b25psj c2b25psk c2b25psm
+        c2b25psn c2b25psp c2b25psq c2b25psr c2b25pss c2b25pst c2b25psu c2b25psv c2b25psw c2b25psx
+        c2b25psy c2b25psz
+    /);
+    is($list[0], 'c2b25ps');
 
 =head2 @list_of_geohashes = $gh->crash(@list_of_merged_geohashes)
 
