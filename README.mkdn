@@ -1,6 +1,6 @@
 # NAME
 
-Geohash - Geo::Hash* wrapper with any utils
+Geohash - Great all in one Geohash library
 
 # SYNOPSIS
 
@@ -37,9 +37,15 @@ fource use xs
 
 # DESCRIPTION
 
-Geohash is a wrapper module for use in the same interface and [Geo::Hash](http://search.cpan.org/perldoc?Geo::Hash) [Geo::Hash::XS](http://search.cpan.org/perldoc?Geo::Hash::XS). and utility method has been added to it.
+[Geohash](http://search.cpan.org/perldoc?Geohash) can handle easily Geohash. Geohash uses [Geo::Hash](http://search.cpan.org/perldoc?Geo::Hash) or [Geo::Hash::XS](http://search.cpan.org/perldoc?Geo::Hash::XS) as a backend module.
+You can easy choose of Pure-Perl implement or XS implement.
+In addition, we have also been added useful utility methods.
 
-You can use the methods in the [Geo::Hash](http://search.cpan.org/perldoc?Geo::Hash) has been implemented in only [Geo::Hash::XS](http://search.cpan.org/perldoc?Geo::Hash::XS).
+# Why did you not used the name Geo::Hash::Any?
+
+Geohash official name is not _Geo::Hash_. It should not be separated by _::_. And I think of _*::Any_ namespace is not preferable.
+
+I think so no problem with increasing the namespace if a namespace that can be used to implement and intuitive.
 
 # METHODS
 
@@ -124,7 +130,12 @@ Kazuhiro Osawa <yappo {at} shibuya {dot} pl>
 
 # SEE ALSO
 
-[Geo::Hash](http://search.cpan.org/perldoc?Geo::Hash), [Geo::Hash::XS](http://search.cpan.org/perldoc?Geo::Hash::XS)
+[Geo::Hash](http://search.cpan.org/perldoc?Geo::Hash), [Geo::Hash::XS](http://search.cpan.org/perldoc?Geo::Hash::XS),
+[http://en.wikipedia.org/wiki/Geohash](http://en.wikipedia.org/wiki/Geohash), [http://geohash.org/](http://geohash.org/)
+
+# THANKS TO
+
+dirkus, tokuhirom, nipotan
 
 # LICENSE
 

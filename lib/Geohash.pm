@@ -222,7 +222,7 @@ __END__
 
 =head1 NAME
 
-Geohash - Geo::Hash* wrapper with any utils
+Geohash - Great all in one Geohash library
 
 =head1 SYNOPSIS
 
@@ -259,9 +259,15 @@ fource use xs
 
 =head1 DESCRIPTION
 
-Geohash is a wrapper module for use in the same interface and L<Geo::Hash> L<Geo::Hash::XS>. and utility method has been added to it.
+L<Geohash> can handle easily Geohash. Geohash uses L<Geo::Hash> or L<Geo::Hash::XS> as a backend module.
+You can easy choose of Pure-Perl implement or XS implement.
+In addition, we have also been added useful utility methods.
 
-You can use the methods in the L<Geo::Hash> has been implemented in only L<Geo::Hash::XS>.
+=head1 Why did you not used the name Geo::Hash::Any?
+
+Geohash official name is not I<Geo::Hash>. It should not be separated by I<::>. And I think of I<*::Any> namespace is not preferable.
+
+I think so no problem with increasing the namespace if a namespace that can be used to implement and intuitive.
 
 =head1 METHODS
 
@@ -346,7 +352,12 @@ Kazuhiro Osawa E<lt>yappo {at} shibuya {dot} plE<gt>
 
 =head1 SEE ALSO
 
-L<Geo::Hash>, L<Geo::Hash::XS>
+L<Geo::Hash>, L<Geo::Hash::XS>,
+L<http://en.wikipedia.org/wiki/Geohash>, L<http://geohash.org/>
+
+=head1 THANKS TO
+
+dirkus, tokuhirom, nipotan
 
 =head1 LICENSE
 
