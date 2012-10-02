@@ -8,7 +8,6 @@ githubmeta;
 requires 'parent';
 requires 'Geo::Hash';
 build_requires 'Test::More';
-build_requires 'Test::Require';
 
 tests 't/*.t';
 author_tests 'xt';
