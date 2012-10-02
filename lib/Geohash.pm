@@ -263,7 +263,7 @@ L<Geohash> can handle easily Geohash. Geohash uses L<Geo::Hash> or L<Geo::Hash::
 You can easy choose of Pure-Perl implement or XS implement.
 In addition, we have also been added useful utility methods.
 
-=head1 Why did you not used the name Geo::Hash::Any?
+=head1 Why did you not used the name of Geo::Hash::Any?
 
 Geohash official name is not I<Geo::Hash>. It should not be separated by I<::>. And I think of I<*::Any> namespace is not preferable.
 

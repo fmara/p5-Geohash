@@ -41,7 +41,7 @@ fource use xs
 You can easy choose of Pure-Perl implement or XS implement.
 In addition, we have also been added useful utility methods.
 
-# Why did you not used the name Geo::Hash::Any?
+# Why did you not used the name of Geo::Hash::Any?
 
 Geohash official name is not _Geo::Hash_. It should not be separated by _::_. And I think of _*::Any_ namespace is not preferable.
 
