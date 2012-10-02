@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::More;
-use GeoHash;
+use Geohash;
 
 my @tests = (
     {
@@ -41,8 +41,8 @@ my @tests = (
     },
 );
 
-ok my $gh = GeoHash->new, "created new GeoHash object";
-isa_ok $gh, 'GeoHash';
+ok my $gh = Geohash->new, "created new Geohash object";
+isa_ok $gh, 'Geohash';
 
 for my $test ( @tests ) {
     my ( $hash, $pos, $eps ) = @{$test}{qw(hash pos eps)};

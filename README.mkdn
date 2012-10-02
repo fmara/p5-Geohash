@@ -1,13 +1,13 @@
 # NAME
 
-GeoHash - Geo::Hash* wrapper with any utils
+Geohash - Geo::Hash* wrapper with any utils
 
 # SYNOPSIS
 
 simple wrapper
 
-    use GeoHash;
-    my $gh = GeoHash->new();
+    use Geohash;
+    my $gh = Geohash->new();
     my $hash = $gh->encode( $lat, $lon );  # default precision = 32
     my $hash = $gh->encode( $lat, $lon, $precision );
     my ($lat, $lon) = $gh->decode( $hash );
@@ -19,7 +19,7 @@ compatible with Pure Perl and XS
     my $adjacent_hash = $gh->adjacent($hash, $where);
     my @list_of_geohashes = $gh->neighbors($hash, $around, $offset);
 
-specific utilities of GeoHash.pm
+specific utilities of Geohash.pm
 
     my @list_of_merged_geohashes = $gh->merge(@list_of_geohashes);
     my @list_of_geohashes = $gh->split(@list_of_merged_geohashes);
@@ -28,22 +28,22 @@ specific utilities of GeoHash.pm
 fource use pp
 
    BEGIN { $ENV{PERL_GEOHASH_BACKEND} = 'Geo::Hash' }
-   use GeoHash;
+   use Geohash;
 
 fource use xs
 
    BEGIN { $ENV{PERL_GEOHASH_BACKEND} = 'Geo::Hash::XS' }
-   use GeoHash;
+   use Geohash;
 
 # DESCRIPTION
 
-GeoHash is a wrapper module for use in the same interface and [Geo::Hash](http://search.cpan.org/perldoc?Geo::Hash) [Geo::Hash::XS](http://search.cpan.org/perldoc?Geo::Hash::XS). and utility method has been added to it.
+Geohash is a wrapper module for use in the same interface and [Geo::Hash](http://search.cpan.org/perldoc?Geo::Hash) [Geo::Hash::XS](http://search.cpan.org/perldoc?Geo::Hash::XS). and utility method has been added to it.
 
 You can use the methods in the [Geo::Hash](http://search.cpan.org/perldoc?Geo::Hash) has been implemented in only [Geo::Hash::XS](http://search.cpan.org/perldoc?Geo::Hash::XS).
 
 # METHODS
 
-## $gh = GeoHash->new()
+## $gh = Geohash->new()
 
 ## $hash = $gh->encode($lat, $lon[, $precision])
 
@@ -51,7 +51,7 @@ Encodes the given `$lat` and `$lon` to a geohash. If `$precision` is not
 given, automatically adjusts the precision according the the given `$lat`
 and `$lon` values.
 
-If you do not want GeoHash to spend time calculating this, explicitly
+If you do not want Geohash to spend time calculating this, explicitly
 specify `$precision`.
 
 ## ($lat, $lon) = $gh->decode( $hash )
@@ -71,9 +71,9 @@ Returns the apparent required precision to describe the given latitude and longi
 Returns the adjacent geohash. `$where` denotes the direction, so if you
 want the block to the right of `$hash`, you say:
 
-    use GeoHash qw(ADJ_RIGHT);
+    use Geohash qw(ADJ_RIGHT);
 
-    my $gh = GeoHash->new();
+    my $gh = Geohash->new();
     my $adjacent = $gh->adjacent( $hash, ADJ_RIGHT );
 
 ## @list_of_geohashes = $gh->neighbors($hash, $around, $offset)

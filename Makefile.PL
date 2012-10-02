@@ -1,8 +1,8 @@
 use inc::Module::Install;
-name 'GeoHash';
-all_from 'lib/GeoHash.pm';
-readme_from 'lib/GeoHash.pm';
-readme_markdown_from 'lib/GeoHash.pm';
+name 'Geohash';
+all_from 'lib/Geohash.pm';
+readme_from 'lib/Geohash.pm';
+readme_markdown_from 'lib/Geohash.pm';
 githubmeta;
 
 requires 'parent';

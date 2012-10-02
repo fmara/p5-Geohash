@@ -1,10 +1,10 @@
 use strict;
 use warnings;
 use Test::More;
-use GeoHash qw(:adjacent);
+use Geohash qw(:adjacent);
 
-ok my $gh = GeoHash->new;
-isa_ok $gh, 'GeoHash';
+ok my $gh = Geohash->new;
+isa_ok $gh, 'Geohash';
 
 # Made these tests by using 
 # http://blog.masuidrive.jp/wp-content/uploads/2010/01/geohash.html

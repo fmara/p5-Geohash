@@ -1,10 +1,10 @@
 use strict;
 use warnings;
 use Test::More;
-use GeoHash;
+use Geohash;
 
-ok my $gh = GeoHash->new;
-isa_ok $gh, 'GeoHash';
+ok my $gh = Geohash->new;
+isa_ok $gh, 'Geohash';
 
 {
     my @set = $gh->neighbors('xn76gg');

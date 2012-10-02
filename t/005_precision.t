@@ -1,9 +1,9 @@
 use strict;
 use warnings;
 use Test::More;
-use GeoHash;
+use Geohash;
 
-my $gh = GeoHash->new;
+my $gh = Geohash->new;
 is $gh->precision('45', '-120'), 4;
 is $gh->precision('45.0', '-120'), 5;
 is $gh->precision('45', '-120.0'), 5;

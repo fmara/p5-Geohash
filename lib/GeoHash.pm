@@ -1,4 +1,4 @@
-package GeoHash;
+package Geohash;
 use strict;
 use warnings;
 our $VERSION = '0.01';
@@ -11,7 +11,7 @@ BEGIN {
     my @classes = qw( Geo::Hash::XS Geo::Hash );
     if (my $backend = $ENV{PERL_GEOHASH_BACKEND}) {
         if ($backend eq 'Geo::Hash') {
-            @classes = qw( GeoHash::backendPP );
+            @classes = qw( Geohash::backendPP );
         } elsif ($backend eq '+Geo::Hash') {
             @classes = qw( Geo::Hash );
         } else {
@@ -23,7 +23,7 @@ BEGIN {
     my $class;
     for (@classes) {
         $class = $_;
-        last if $class eq 'GeoHash::backendPP';
+        last if $class eq 'Geohash::backendPP';
         eval "use $class";## no critic
         last unless $@;
     }
@@ -120,7 +120,7 @@ sub validate {
 
 
 {
-    package GeoHash::backendPP;
+    package Geohash::backendPP;
     use strict;
     use warnings;
     use parent 'Geo::Hash';
@@ -222,14 +222,14 @@ __END__
 
 =head1 NAME
 
-GeoHash - Geo::Hash* wrapper with any utils
+Geohash - Geo::Hash* wrapper with any utils
 
 =head1 SYNOPSIS
 
 simple wrapper
 
-    use GeoHash;
-    my $gh = GeoHash->new();
+    use Geohash;
+    my $gh = Geohash->new();
     my $hash = $gh->encode( $lat, $lon );  # default precision = 32
     my $hash = $gh->encode( $lat, $lon, $precision );
     my ($lat, $lon) = $gh->decode( $hash );
@@ -241,7 +241,7 @@ compatible with Pure Perl and XS
     my $adjacent_hash = $gh->adjacent($hash, $where);
     my @list_of_geohashes = $gh->neighbors($hash, $around, $offset);
 
-specific utilities of GeoHash.pm
+specific utilities of Geohash.pm
 
     my @list_of_merged_geohashes = $gh->merge(@list_of_geohashes);
     my @list_of_geohashes = $gh->split(@list_of_merged_geohashes);
@@ -250,22 +250,22 @@ specific utilities of GeoHash.pm
 fource use pp
 
    BEGIN { $ENV{PERL_GEOHASH_BACKEND} = 'Geo::Hash' }
-   use GeoHash;
+   use Geohash;
 
 fource use xs
 
    BEGIN { $ENV{PERL_GEOHASH_BACKEND} = 'Geo::Hash::XS' }
-   use GeoHash;
+   use Geohash;
 
 =head1 DESCRIPTION
 
-GeoHash is a wrapper module for use in the same interface and L<Geo::Hash> L<Geo::Hash::XS>. and utility method has been added to it.
+Geohash is a wrapper module for use in the same interface and L<Geo::Hash> L<Geo::Hash::XS>. and utility method has been added to it.
 
 You can use the methods in the L<Geo::Hash> has been implemented in only L<Geo::Hash::XS>.
 
 =head1 METHODS
 
-=head2 $gh = GeoHash->new()
+=head2 $gh = Geohash->new()
 
 =head2 $hash = $gh->encode($lat, $lon[, $precision])
 
@@ -273,7 +273,7 @@ Encodes the given C<$lat> and C<$lon> to a geohash. If C<$precision> is not
 given, automatically adjusts the precision according the the given C<$lat>
 and C<$lon> values.
 
-If you do not want GeoHash to spend time calculating this, explicitly
+If you do not want Geohash to spend time calculating this, explicitly
 specify C<$precision>.
 
 =head2 ($lat, $lon) = $gh->decode( $hash )
@@ -293,9 +293,9 @@ Returns the apparent required precision to describe the given latitude and longi
 Returns the adjacent geohash. C<$where> denotes the direction, so if you
 want the block to the right of C<$hash>, you say:
 
-    use GeoHash qw(ADJ_RIGHT);
+    use Geohash qw(ADJ_RIGHT);
 
-    my $gh = GeoHash->new();
+    my $gh = Geohash->new();
     my $adjacent = $gh->adjacent( $hash, ADJ_RIGHT );
 
 =head2 @list_of_geohashes = $gh->neighbors($hash, $around, $offset)

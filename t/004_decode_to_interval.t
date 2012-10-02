@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::More;
-use GeoHash;
+use Geohash;
 
 # The test data are introduced from 
 # http://github.com/masuidrive/pr_geohash/blob/master/test/test_pr_geohash.rb
@@ -17,7 +17,7 @@ my %tests = (
     ],
 );
 
-my $gh = GeoHash->new;
+my $gh = Geohash->new;
 for (keys %tests) {
     is_deeply [$gh->decode_to_interval($_)], $tests{$_};
 }

@@ -1,9 +1,9 @@
 use strict;
 use warnings;
 use Test::More;
-use GeoHash;
+use Geohash;
 
-my $gh = GeoHash->new;
+my $gh = Geohash->new;
 
 my @list = $gh->split('c2b25ps');
 is_deeply(\@list, [ qw/

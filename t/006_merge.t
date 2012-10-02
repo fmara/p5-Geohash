@@ -1,10 +1,10 @@
 use strict;
 use warnings;
 use Test::More;
-use GeoHash;
+use Geohash;
 
 
-my $gh = GeoHash->new;
+my $gh = Geohash->new;
 
 
 subtest 'bad' => sub {
