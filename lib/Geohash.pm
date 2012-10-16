@@ -8,7 +8,7 @@ our @EXPORT_OK   = qw( ADJ_TOP ADJ_RIGHT ADJ_LEFT ADJ_BOTTOM );
 our %EXPORT_TAGS = (adjacent => \@EXPORT_OK);
 
 BEGIN {
-    my @classes = qw( Geo::Hash::XS Geo::Hash );
+    my @classes = qw( Geo::Hash::XS Geohash::backendPP );
     if (my $backend = $ENV{PERL_GEOHASH_BACKEND}) {
         if ($backend eq 'Geo::Hash') {
             @classes = qw( Geohash::backendPP );
@@ -27,7 +27,9 @@ BEGIN {
         eval "use $class";## no critic
         last unless $@;
     }
-    die $@ if $@;
+    unless ($class eq 'Geohash::backendPP') {
+        die $@ if $@;
+    }
 
     sub backend_class { $class }
 
