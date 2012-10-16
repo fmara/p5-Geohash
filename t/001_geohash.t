@@ -81,7 +81,7 @@ for my $test ( @bad_cases ) {
     my $ret = eval {
         $gh->encode( @$pos );
     };
-    if ($ENV{PERL_GEOHASH_BACKEND} && $ENV{PERL_GEOHASH_BACKEND} eq 'Geo::Hash') {
+    if ($gh->backend_class ne 'Geo::Hash::XS') {
         ok $ret;
     } else {
         ok $@;
